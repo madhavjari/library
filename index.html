@@ -9,33 +9,33 @@
 <body>
 
     <div class="container">
+        <h2>Your Library</h2>
         <button id="add-book">Add Books</button>
-        <div class="display">
-            <h2>Library</h2>
-        </div>
         <dialog id="book-form">
             <form action="./submit" method="get">
-                <h3>Add a Book</h3>
                 <button id="close-button" type="button">&times;</button>
-                <div>
-                    <label for="title"><h3>Title*</h3></label>
-                    <input type="text" id="title" placeholder="Harry Potter" name="title" required>
-                </div>
-                <div>
-                    <label for="author"><h3>Book Author*</h3></label>
-                    <input type="text" id="author" placeholder="JK Rowling" name="author" required>
-                </div>
-                <div>
-                    <label for="pages"><h3>Total Pages*</h3></label>
-                    <input type="number" id="pages" placeholder="651" name="pages" required>
-                </div>
-                <div>
-                    <label for="issue"><h3>Issue Year</h3></label>
-                    <input type="year" id="issue" placeholder="1991" name="issue">
-                </div>
-                <div>
-                    <label for="status"><h4>read</h4></label>
-                    <input type="checkbox" name="status" id="status">
+                <h3>Add a Book</h3>
+                <div class="input-container">
+                    <div>
+                        <label for="title"><h3>Title*</h3></label><br>
+                        <input type="text" id="title" placeholder="Harry Potter" name="title" required>
+                    </div>
+                    <div>
+                        <label for="author"><h3>Book Author*</h3></label><br>
+                        <input type="text" id="author" placeholder="JK Rowling" name="author" required>
+                    </div>
+                    <div>
+                        <label for="pages"><h3>Total Pages*</h3></label><br>
+                        <input type="number" id="pages" placeholder="651" name="pages" required>
+                    </div>
+                    <div>
+                        <label for="issue"><h3>Issue Year</h3></label><br>
+                        <input type="year" id="issue" placeholder="1991" name="issue">
+                    </div>
+                    <div>
+                        <label for="status"><h4>read</h4></label><br>
+                        <input type="checkbox" name="status" id="status">
+                    </div>
                 </div>
                 <div><button type="submit" class="submit">Submit</button></div>
                 </form>

@@ -1,7 +1,8 @@
-const bookDisplay = document.querySelector('.display');
+//creating book container for book cards
+const mainContainer = document.querySelector('.container');
 const bookContainer = document.createElement('div');
 bookContainer.classList.add('book-container');
-bookDisplay.appendChild(bookContainer);
+mainContainer.appendChild(bookContainer);
 
 //function for taking user input and displaying in card form
 function createBookCard(id,title,author,pages,issue,status){    
@@ -27,20 +28,25 @@ function createBookCard(id,title,author,pages,issue,status){
     card.appendChild(bookIssue);
 
     const statusButton = document.createElement('button');
+    statusButton.classList.add('status-button');
+    statusButton.textContent = status;
     card.appendChild(statusButton);
 
-    const bookStatus = document.createElement('h4');
-    bookStatus.textContent = status;
-    statusButton.appendChild(bookStatus);
+    //changing the status of book on click in array and display
+    statusButton.addEventListener('click',() =>{
+        const status = document.querySelector('#a'+id+'.card>.status-button');
+        if(status.textContent === 'Unread')status.textContent = 'Read';
+        else status.textContent = 'Unread';
+        const statusChange = myLibrary.find(book => book.id === id);
+        if(statusChange) statusChange.toogleStatus();
+    })
 
     const removeButton = document.createElement('button');
     removeButton.id = id;
+    removeButton.textContent = 'Remove';
     card.appendChild(removeButton);
 
-    const bookRemove = document.createElement('h4');
-    bookRemove.textContent = 'Remove';
-    removeButton.appendChild(bookRemove);
-    
+    //deleting book on click in array and display
     removeButton.addEventListener('click',() => {
         const card = document.querySelector('#a'+id+'.card');
         console.log(card);
@@ -51,7 +57,6 @@ function createBookCard(id,title,author,pages,issue,status){
         if(index !== -1)myLibrary.splice(index,1);
     })
 }
-
 
 const myLibrary=[]; //for storing every book
 
@@ -65,13 +70,22 @@ function Book(id,title,author,pages,issue,status){
     this.status = status;
 }
 
+//book prototype for changing status 
+Book.prototype.toogleStatus = function(){
+    if(this.status === 'Read') this.status = 'Unread';
+    else if(this.status === 'Unread') this.status = 'Read';
+    else this.status = 'Error';
+}
+
 //adding the user inputs in library array
 function addBookToLibrary(id,title,author,pages,issue,status){
     const book = new Book(id,title,author,pages,issue,status);
+    console.log(book.status);
     myLibrary.push(book);
     console.log(myLibrary);
     createBookCard(id,title,author,pages,issue,status);
 }
+
 const bookForm = document.getElementById('book-form');
 //form opens after clicking add button
 document.getElementById('add-book').addEventListener('click',() => {
@@ -84,16 +98,8 @@ const pagesInput = document.getElementById('pages');
 const issueInput = document.getElementById('issue');
 const statusInput = document.getElementById('status');
 
-bookForm.addEventListener('close',() =>{
-    titleInput.setAttribute('required', 'true');
-    authorInput.setAttribute('required', 'true');
-    pagesInput.setAttribute('required', 'true');
-})
-
+//form closes on clicking of button
 document.getElementById('close-button').addEventListener('click',() =>{
-    titleInput.removeAttribute('required');
-    authorInput.removeAttribute('required'); 
-    pagesInput.removeAttribute('required');
     bookForm.close();
 } )
 
@@ -113,4 +119,3 @@ form.addEventListener('submit', function(event){
     addBookToLibrary(id,title,author,pages,issue,status);
     formElement.reset();
 })
-
