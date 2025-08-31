@@ -10,7 +10,7 @@
 
     <div class="container">
         <h2>Your Library</h2>
-        <button id="add-book">Add Books</button>
+        <div><button id="add-book">Add Books</button></div>
         <dialog id="book-form">
             <form action="./submit" method="get">
                 <button id="close-button" type="button">&times;</button>
@@ -18,7 +18,7 @@
                 <div class="input-container">
                     <div>
                         <label for="title"><h3>Title*</h3></label><br>
-                        <input type="text" id="title" placeholder="Harry Potter" name="title" required>
+                        <input type="text" id="title" placeholder="Harry Potter" name="title" required autofocus>
                     </div>
                     <div>
                         <label for="author"><h3>Book Author*</h3></label><br>
@@ -33,7 +33,7 @@
                         <input type="year" id="issue" placeholder="1991" name="issue">
                     </div>
                     <div>
-                        <label for="status"><h4>read</h4></label><br>
+                        <label for="status"><h4>read</h4></label>
                         <input type="checkbox" name="status" id="status">
                     </div>
                 </div>

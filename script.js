@@ -55,7 +55,7 @@ function createBookCard(id,title,author,pages,issue,status){
         console.log(bookToRemove);
         const index = myLibrary.findIndex(book => book.id === bookToRemove);
         if(index !== -1)myLibrary.splice(index,1);
-    })
+    })  
 }
 
 const myLibrary=[]; //for storing every book
@@ -118,4 +118,5 @@ form.addEventListener('submit', function(event){
     else status = 'Unread';
     addBookToLibrary(id,title,author,pages,issue,status);
     formElement.reset();
+    if (titleInput) titleInput.focus();
 })
