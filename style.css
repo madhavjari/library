@@ -130,6 +130,11 @@ input{
     font-size: 1rem;
 }
 
+input:invalid{
+    border: var(--purple) solid;
+    
+}
+
 .book-container{
     text-align: left;
     display: grid;

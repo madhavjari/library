@@ -98,6 +98,32 @@ const pagesInput = document.getElementById('pages');
 const issueInput = document.getElementById('issue');
 const statusInput = document.getElementById('status');
 
+const titleError = document.querySelector('#title + span.error');
+const authorError = document.querySelector('#author + span.error');
+
+titleInput.addEventListener('input', (e) =>{
+    if(titleInput.validity.valid){
+        titleError.innerHTML = '';
+        titleError.className = 'error';
+    }
+    if(titleInput.validity.valueMissing){
+        titleError.textContent = 'Enter Title';
+        titleError.className = 'error active';
+    }
+})
+
+authorInput.addEventListener('input', (e) =>{
+    if(authorInput.validity.valid){
+        authorError.innerHTML = '';
+        authorError.className = 'error';
+    }
+    if(authorInput.validity.valueMissing){
+        authorError.textContent = 'Enter Author';
+        authorError.className = 'error active';
+    }
+})
+
+
 //form closes on clicking of button
 document.getElementById('close-button').addEventListener('click',() =>{
     bookForm.close();
@@ -105,18 +131,33 @@ document.getElementById('close-button').addEventListener('click',() =>{
 
 //taking user inputs and parsing the values
 form = document.querySelector('form');
+
+
 form.addEventListener('submit', function(event){
+    if(!titleInput.validity.valid){
+        titleError.textContent = 'Enter Title';
+        titleError.className = 'error active';
+    }
+    else if(!authorInput.validity.valid){
+        authorError.textContent = 'Enter author';
+        authorError.className = 'error active';
+        console.log('into');
+    }
+    
+    else{
+        const formElement = event.target;
+        const id = crypto.randomUUID();
+        const title = titleInput.value;
+        const author = authorInput.value;
+        const pages = pagesInput.value;
+        const issue = issueInput.value;
+        let status = statusInput.checked;
+        if (status) status = 'Read';
+        else status = 'Unread';
+        addBookToLibrary(id,title,author,pages,issue,status);
+        formElement.reset();
+        if (titleInput) titleInput.focus();
+    }
+
     event.preventDefault();
-    const formElement = event.target;
-    const id = crypto.randomUUID();
-    const title = titleInput.value;
-    const author = authorInput.value;
-    const pages = pagesInput.value;
-    const issue = issueInput.value;
-    let status = statusInput.checked;
-    if (status) status = 'Read';
-    else status = 'Unread';
-    addBookToLibrary(id,title,author,pages,issue,status);
-    formElement.reset();
-    if (titleInput) titleInput.focus();
 })
