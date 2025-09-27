@@ -132,7 +132,6 @@ document.getElementById('close-button').addEventListener('click',() =>{
 //taking user inputs and parsing the values
 form = document.querySelector('form');
 
-
 form.addEventListener('submit', function(event){
     if(!titleInput.validity.valid){
         titleError.textContent = 'Enter Title';
@@ -141,7 +140,6 @@ form.addEventListener('submit', function(event){
     else if(!authorInput.validity.valid){
         authorError.textContent = 'Enter author';
         authorError.className = 'error active';
-        console.log('into');
     }
     
     else{
