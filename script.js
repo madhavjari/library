@@ -29,6 +29,8 @@ function createBookCard(id, title, author, pages, issue, status) {
 
   const statusButton = document.createElement("button");
   statusButton.classList.add("status-button");
+  statusButton.classList.add(status === "Read" ? "status-read" : "status-unread");
+  statusButton.type = "button";
   statusButton.textContent = status;
   card.appendChild(statusButton);
 
@@ -37,22 +39,24 @@ function createBookCard(id, title, author, pages, issue, status) {
     const status = document.querySelector("#a" + id + ".card>.status-button");
     if (status.textContent === "Unread") status.textContent = "Read";
     else status.textContent = "Unread";
+    status.classList.toggle("status-read");
+    status.classList.toggle("status-unread");
     const statusChange = myLibrary.find((book) => book.id === id);
     if (statusChange) statusChange.toogleStatus();
   });
 
   const removeButton = document.createElement("button");
   removeButton.id = id;
+  removeButton.classList.add("remove-button");
+  removeButton.type = "button";
   removeButton.textContent = "Remove";
   card.appendChild(removeButton);
 
   //deleting book on click in array and display
   removeButton.addEventListener("click", () => {
     const card = document.querySelector("#a" + id + ".card");
-    console.log(card);
     if (card) card.remove();
     const bookToRemove = id;
-    console.log(bookToRemove);
     const index = myLibrary.findIndex((book) => book.id === bookToRemove);
     if (index !== -1) myLibrary.splice(index, 1);
   });
@@ -80,9 +84,7 @@ Book.prototype.toogleStatus = function () {
 //adding the user inputs in library array
 function addBookToLibrary(id, title, author, pages, issue, status) {
   const book = new Book(id, title, author, pages, issue, status);
-  console.log(book.status);
   myLibrary.push(book);
-  console.log(myLibrary);
   createBookCard(id, title, author, pages, issue, status);
 }
 
@@ -96,6 +98,7 @@ const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
 const issueInput = document.getElementById("issue");
 const statusInput = document.getElementById("status");
+const statusState = document.querySelector(".status-field__state");
 
 const titleError = document.querySelector("#title + span.error");
 const authorError = document.querySelector("#author + span.error");
@@ -120,6 +123,10 @@ authorInput.addEventListener("input", () => {
     authorError.textContent = "Enter Author";
     authorError.className = "error active";
   }
+});
+
+statusInput.addEventListener("change", () => {
+  statusState.textContent = statusInput.checked ? "Read" : "Unread";
 });
 
 //form closes on clicking of button
@@ -149,6 +156,8 @@ form.addEventListener("submit", function (event) {
     else status = "Unread";
     addBookToLibrary(id, title, author, pages, issue, status);
     formElement.reset();
+    statusState.textContent = "Unread";
+    bookForm.close();
     if (titleInput) titleInput.focus();
   }
 

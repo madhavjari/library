@@ -1,47 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <h2>Your Library</h2>
-        <div><button id="add-book">Add Books</button></div>
-        <dialog id="book-form">
-            <form action="./submit" method="get" novalidate>
-                <button id="close-button" type="button">&times;</button>
-                <h3>Add a Book</h3>
-                <div class="input-container">
-                    <div>
-                        <label for="title"><h3>Title*</h3></label><br>
-                        <input type="text" id="title" placeholder="Harry Potter" name="title" required autofocus>
-                        <span class="error"></span>
-                    </div>
-                    <div>
-                        <label for="author"><h3>Book Author*</h3></label><br>
-                        <input type="text" id="author" placeholder="JK Rowling" name="author" required>
-                        <span class="error"></span>
-                    </div>
-                    <div>
-                        <label for="pages"><h3>Total Pages*</h3></label><br>
-                        <input type="number" id="pages" placeholder="651" name="pages" required>
-                    </div>
-                    <div>
-                        <label for="issue"><h3>Issue Year</h3></label><br>
-                        <input type="number" id="issue" placeholder="1991" name="issue">
-                    </div>
-                    <div>
-                        <label for="status"><h4>read</h4></label>
-                        <input type="checkbox" name="status" id="status">
-                    </div>
-                </div>
-                <div><button type="submit" class="submit">Submit</button></div>
-                </form>
-        </dialog>
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Personal reading list</p>
+          <h1>Your Library</h1>
+          <p class="subtitle">
+            Keep track of what you have read, what is next, and everything in
+            between.
+          </p>
+        </div>
+        <button id="add-book" class="primary-button" type="button">
+          Add Book
+        </button>
+      </header>
+      <dialog id="book-form">
+        <form action="./submit" method="get" novalidate>
+          <button id="close-button" type="button" aria-label="Close dialog">
+            &times;
+          </button>
+          <h3>Add a Book</h3>
+          <div class="input-container">
+            <div>
+              <label for="title"><h4>Title*</h4></label>
+              <input
+                type="text"
+                id="title"
+                placeholder="Harry Potter"
+                name="title"
+                required
+                autofocus
+              />
+              <span class="error"></span>
+            </div>
+            <div>
+              <label for="author"><h4>Book Author*</h4></label>
+              <input
+                type="text"
+                id="author"
+                placeholder="JK Rowling"
+                name="author"
+                required
+              />
+              <span class="error"></span>
+            </div>
+            <div>
+              <label for="pages"><h4>Total Pages*</h4></label>
+              <input
+                type="number"
+                id="pages"
+                placeholder="651"
+                name="pages"
+                required
+              />
+            </div>
+            <div>
+              <label for="issue"><h4>Issue Year</h4></label>
+              <input type="number" id="issue" placeholder="1991" name="issue" />
+            </div>
+            <div>
+              <label class="status-field" for="status">
+                <span class="status-field__text">Read status</span>
+                <span class="toggle">
+                  <input type="checkbox" name="status" id="status" />
+                  <span class="toggle__track" aria-hidden="true">
+                    <span class="toggle__thumb"></span>
+                  </span>
+                </span>
+                <span class="status-field__state">Unread</span>
+              </label>
+            </div>
+          </div>
+          <div><button type="submit" class="submit">Submit</button></div>
+        </form>
+      </dialog>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
